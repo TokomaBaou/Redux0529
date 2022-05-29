@@ -38,3 +38,11 @@ store.dispatch({ type: "increment" });
 store.dispatch({ type: "increment" });
 /**console.logで値を出す */
 console.log(store.getState()); //-> 2
+
+/** subscribの実装
+ * subscribeするときに
+ * listenerをstoreの中にある
+ * listenersに追加していって
+ * 後でdispatchした時に
+ * そのlistenerを呼び出す
+ */
