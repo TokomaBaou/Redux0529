@@ -18,3 +18,12 @@ const createStore = (reducer) => {
     dispatch
   };
 };
+
+//reducerを作る
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "increment": {
+      return state + 1;
+    }
+  }
+};
