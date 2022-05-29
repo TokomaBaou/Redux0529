@@ -21,8 +21,11 @@ const createStore = (reducer) => {
 
 //reducerを作る
 const reducer = (state, action) => {
+  /**処理をcaseで分ける */
   switch (action.type) {
+    /**増加させる場合 */
     case "increment": {
+      /**stateの変更処理 */
       return state + 1;
     }
   }
@@ -30,6 +33,8 @@ const reducer = (state, action) => {
 
 //初期化
 const store = createStore(reducer);
+/**storeをdispatchする */
 store.dispatch({ type: "increment" });
 store.dispatch({ type: "increment" });
+/**console.logで値を出す */
 console.log(store.getState()); //-> 2
