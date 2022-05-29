@@ -5,17 +5,32 @@ export const Store = () => {
 //storeを作る
 const createStore = (reducer) => {
   let state = 0;
+  /**listeners */
+  const listeners = [];
 
   const dispatch = (action) => {
     /**新しいstateが返っている */
     const newState = reducer(state, action);
     state = newState;
+    listeners.map((listener) => listener());
+  };
+
+  /** subscribの実装
+   * subscribeするときに
+   * listenerをstoreの中にある
+   * listenersに追加していって
+   * 後でdispatchした時に
+   * そのlistenerを呼び出す
+   */
+  const subscribe = (listener) => {
+    listeners.push(listener);
   };
 
   /**返却値 */
   return {
     getState: () => state,
-    dispatch
+    dispatch,
+    subscribe
   };
 };
 
@@ -35,14 +50,12 @@ const reducer = (state, action) => {
 const store = createStore(reducer);
 /**storeをdispatchする */
 store.dispatch({ type: "increment" });
-store.dispatch({ type: "increment" });
 /**console.logで値を出す */
-console.log(store.getState()); //-> 2
+const logger = () => {
+  console.log(store.getState()); //-> 2
+};
 
-/** subscribの実装
- * subscribeするときに
- * listenerをstoreの中にある
- * listenersに追加していって
- * 後でdispatchした時に
- * そのlistenerを呼び出す
- */
+store.subscribe(logger);
+store.dispatch({ type: "increment" });
+store.dispatch({ type: "increment" });
+store.dispatch({ type: "increment" });
