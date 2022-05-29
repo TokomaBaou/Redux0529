@@ -27,3 +27,9 @@ const reducer = (state, action) => {
     }
   }
 };
+
+//初期化
+const store = createStore(reducer);
+store.dispatch({ type: "increment" });
+store.dispatch({ type: "increment" });
+console.log(store.getState()); //-> 2
